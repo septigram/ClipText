@@ -33,7 +33,7 @@ namespace ClipText
                 if (v != null)
                 {
                     // Console.WriteLine($"ClipText: {v}");
-                    Clipboard.SetText(v);
+                    SetClipboard(v);
                 }
             }
 
@@ -47,7 +47,14 @@ namespace ClipText
                 return;
             }
             var v = DateTime.Now.ToString("yyyy/MM/dd");
-            Clipboard.SetText(v);
+            SetClipboard(v);
+        }
+
+        void SetClipboard(string v)
+        {
+            try {
+                Clipboard.SetText(v);
+            } catch (Exception e) { }
         }
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
