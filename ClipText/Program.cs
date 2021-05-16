@@ -198,6 +198,7 @@ namespace ClipText
             {
                 _form1.ClipboardSendDate();
             }
+            _form1.IncrementKeyDown();
             // Console.WriteLine("Keydown KeyCode {0}, shift:{1}, ctrl:{2}", e.KeyCode, _shift, _ctrl);
         }
     }

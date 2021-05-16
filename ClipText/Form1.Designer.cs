@@ -33,10 +33,12 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ClipboaradConvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
             this.ClipboardSendDateCtrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,17 +48,19 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "クリップボードの書式情報を除去";
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem,
             this.ClipboaradConvToolStripMenuItem,
             this.ClipboardSendDateCtrlToolStripMenuItem,
             this.toolStripMenuItem1,
             this.ExitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(299, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(299, 98);
             // 
             // ClipboaradConvToolStripMenuItem
             // 
@@ -64,6 +68,18 @@
             this.ClipboaradConvToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
             this.ClipboaradConvToolStripMenuItem.Text = "クリップボードの書式情報を除去(Ctrl+Shift+V)";
             this.ClipboaradConvToolStripMenuItem.Click += new System.EventHandler(this.ClipboaradConvToolStripMenuItem_Click);
+            // 
+            // ClipboardSendDateCtrlToolStripMenuItem
+            // 
+            this.ClipboardSendDateCtrlToolStripMenuItem.Name = "ClipboardSendDateCtrlToolStripMenuItem";
+            this.ClipboardSendDateCtrlToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.ClipboardSendDateCtrlToolStripMenuItem.Text = "日付をクリップボードに挿入(Ctrl+;)";
+            this.ClipboardSendDateCtrlToolStripMenuItem.Click += new System.EventHandler(this.ClipboardSendDateCtrlToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(295, 6);
             // 
             // ExitToolStripMenuItem
             // 
@@ -82,23 +98,29 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // ClipboardSendDateCtrlToolStripMenuItem
+            // textBoxLog
             // 
-            this.ClipboardSendDateCtrlToolStripMenuItem.Name = "ClipboardSendDateCtrlToolStripMenuItem";
-            this.ClipboardSendDateCtrlToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
-            this.ClipboardSendDateCtrlToolStripMenuItem.Text = "日付をクリップボードに挿入(Ctrl+;)";
-            this.ClipboardSendDateCtrlToolStripMenuItem.Click += new System.EventHandler(this.ClipboardSendDateCtrlToolStripMenuItem_Click);
+            this.textBoxLog.Location = new System.Drawing.Point(12, 41);
+            this.textBoxLog.Multiline = true;
+            this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.ReadOnly = true;
+            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxLog.Size = new System.Drawing.Size(191, 97);
+            this.textBoxLog.TabIndex = 2;
             // 
-            // toolStripMenuItem1
+            // showToolStripMenuItem
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(295, 6);
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(298, 22);
+            this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(215, 49);
+            this.ClientSize = new System.Drawing.Size(215, 150);
+            this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -107,8 +129,11 @@
             this.ShowInTaskbar = false;
             this.Text = "ClipText";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -121,6 +146,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem ClipboardSendDateCtrlToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.TextBox textBoxLog;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
     }
 }
 
