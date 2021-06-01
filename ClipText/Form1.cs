@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,10 @@ namespace ClipText
         private delegate void CallDelegate1(string msg);
 
         SortedDictionary<string, int> countMap = new SortedDictionary<string, int>();
+
+        DateTime from = DateTime.Now;
+        DateTime to = DateTime.Now;
+        long s = 0;
 
         public Form1()
         {
@@ -53,6 +58,7 @@ namespace ClipText
             {
                 countMap[ymdh] = 1;
             }
+            s++;
             StringBuilder sb = new StringBuilder();
             foreach (var e in countMap.Reverse())
             {
@@ -68,7 +74,9 @@ namespace ClipText
                 textBoxLog.Invoke(new CallDelegate1(UpdateState), new object[] { msg });
                 return;
             }
+            Text = $"ClipText {s:#,0}";
             textBoxLog.Text = msg;
+            to = DateTime.Now;
         }
 
         public void ClipboardSendDate()
@@ -121,18 +129,38 @@ namespace ClipText
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
+            Show();
             WindowState = FormWindowState.Normal;
         }
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Show();
             WindowState = FormWindowState.Normal;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
-            e.Cancel = true;
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                WindowState = FormWindowState.Minimized;
+                Hide();
+                e.Cancel = true;
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            using (var sw = File.AppendText(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "ClipText.log")))
+            {
+                sw.WriteLine(textBoxLog.Text);
+            }
+
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText($"{from:yyyy-MM-dd HH:mm:ss}...{to:yyyy-MM-dd HH:mm:ss} {s:#0,0}\n{textBoxLog.Text}");
         }
     }
 }
