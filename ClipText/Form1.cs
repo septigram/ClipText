@@ -160,7 +160,7 @@ namespace ClipText
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText($"{from:yyyy-MM-dd HH:mm:ss}...{to:yyyy-MM-dd HH:mm:ss} {s:#0,0}\n{textBoxLog.Text}");
+            Clipboard.SetText($"{from:yyyy-MM-dd HH:mm:ss}...{to:yyyy-MM-dd HH:mm:ss} {s:#,0}\n{textBoxLog.Text}");
         }
     }
 }
