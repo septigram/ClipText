@@ -94,7 +94,7 @@ namespace ClipText
         {
             try {
                 Clipboard.SetText(v);
-            } catch (Exception e) { }
+            } catch (Exception) { }
         }
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
@@ -160,7 +160,7 @@ namespace ClipText
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText($"{from:yyyy-MM-dd HH:mm:ss}...{to:yyyy-MM-dd HH:mm:ss} {s:#,0}\n{textBoxLog.Text}");
+            SetClipboard($"{from:yyyy-MM-dd HH:mm:ss}...{to:yyyy-MM-dd HH:mm:ss} {s:#,0}\n{textBoxLog.Text}");
         }
     }
 }
